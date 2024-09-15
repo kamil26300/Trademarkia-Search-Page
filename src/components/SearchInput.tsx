@@ -1,18 +1,23 @@
 import React, { useState } from "react";
+import CustomButton from "./CustomButton";
 
 interface SearchInputProps {
   updateParams: (key: string, value: string) => void;
+  input_query: any;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ updateParams }) => {
-  const [input, setInput] = useState("");
+const SearchInput: React.FC<SearchInputProps> = ({
+  input_query,
+  updateParams,
+}) => {
+  const [input, setInput] = useState(input_query || "");
 
   const handleSearch = () => {
     updateParams("input_query", input);
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center gap-2">
       <input
         type="text"
         className="border p-2 rounded w-full"
@@ -20,9 +25,9 @@ const SearchInput: React.FC<SearchInputProps> = ({ updateParams }) => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button className="ml-2 bg-blue-500 text-white p-2 rounded" onClick={handleSearch}>
+      <CustomButton disabled={input === ""} onClickButton={handleSearch}>
         Search
-      </button>
+      </CustomButton>
     </div>
   );
 };

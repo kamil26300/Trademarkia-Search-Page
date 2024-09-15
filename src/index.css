@@ -27,5 +27,14 @@ h6 {
 }
 
 body {
-  @apply p-4;
+  @apply p-4 bg-[#eee];
+}
+
+.truncate-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* Allows wrapping */
 }

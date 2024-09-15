@@ -8,14 +8,13 @@ export const useSearchParams = () => {
   const navigate = useNavigate();
   const [params, setParams] = useState(parseUrlParams(location.search));
 
-  // Helper function to serialize params (e.g., convert arrays to comma-separated strings)
   const serializeParams = (params: Record<string, any>) => {
-    
     const searchParams = new URLSearchParams();
     Object.keys(params).forEach((key) => {
       const value = params[key];
       if (Array.isArray(value)) {
-        searchParams.set(key, value.join(",")); // Convert arrays to comma-separated strings
+        searchParams.delete(key);
+        value.forEach((v) => searchParams.append(key, v));
       } else {
         searchParams.set(key, value);
       }
@@ -35,7 +34,7 @@ export const useSearchParams = () => {
     });
   };
 
-  useEffect(() => {    
+  useEffect(() => {
     setParams(parseUrlParams(location.search));
   }, [location.search]);
 
@@ -43,12 +42,21 @@ export const useSearchParams = () => {
 };
 
 export const fetchResults = async (params: any) => {
-  // params = {sort_by:"default", exact_match:false, date_query:false, page:1, rows:10, sort_order:"desc", ...params}
+  params = {
+    sort_by: "default",
+    exact_match: false,
+    date_query: false,
+    page: 1,
+    sort_order: "desc",
+    ...params,
+    rows: 10,
+  };
+
+  console.log(params);
   let data = JSON.stringify(params);
 
   let config = {
     method: "post",
-    maxBodyLength: Infinity,
     url: "https://vit-tm-task.api.trademarkia.app/api/v3/us",
     headers: {
       "Content-Type": "application/json",
@@ -58,7 +66,39 @@ export const fetchResults = async (params: any) => {
 
   try {
     const response = await axios.request(config);
-    return response.data;
+    return response.data.body.hits;
+  } catch (error) {
+    console.error("Error fetching results:", error);
+    throw error;
+  }
+};
+
+export const fetchFilters = async (input_query: string) => {
+  const params = {
+    sort_by: "default",
+    input_query: input_query,
+    exact_match: false,
+    date_query: false,
+    page: 1,
+    sort_order: "desc",
+    rows: 10,
+  };
+
+  let data = JSON.stringify(params);
+
+  let config = {
+    method: "post",
+    url: "https://vit-tm-task.api.trademarkia.app/api/v3/us",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data,
+  };
+
+  try {
+    const response = await axios.request(config);
+    console.log("Filters fetched");
+    return response.data.body.aggregations;
   } catch (error) {
     console.error("Error fetching results:", error);
     throw error;

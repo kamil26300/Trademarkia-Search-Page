@@ -8,9 +8,9 @@ export const parseUrlParams = (search: string) => {
 
   // Build the parsed parameters object
   const parsedParams = {
-    input_query: params.get("input_query") || "nike",
+    input_query: params.get("input_query") || "",
     input_query_type: params.get("input_query_type") || "",
-    sort_by: params.get("sort_by") || "default",
+    sort_by: params.get("sort_by") || "",
     
     status: getArrayParam("status"),
     owners: getArrayParam("owners"),
@@ -19,12 +19,12 @@ export const parseUrlParams = (search: string) => {
     mark_description_description: getArrayParam("mark_description_description"),
     classes: getArrayParam("classes"),
     
-    exact_match: params.get("exact_match") === "true",
-    date_query: params.get("date_query") === "true",
+    exact_match: params.get("exact_match") === "true" ? true : "",
+    date_query: params.get("date_query") === "true" ? true : "",
     
-    page: Number(params.get("page")) || 1,
-    rows: Number(params.get("rows")) || 10,
-    sort_order: params.get("sort_order") || "desc",
+    page: Number(params.get("page")) || "",
+    rows: Number(params.get("rows")) || "",
+    sort_order: params.get("sort_order") || "",
     
     states: getArrayParam("states"),
     counties: getArrayParam("counties"),
@@ -33,11 +33,10 @@ export const parseUrlParams = (search: string) => {
   // Remove items with empty strings or empty arrays
   const filteredParams = Object.fromEntries(
     Object.entries(parsedParams).filter(([key, value]) => 
-      // Exclude empty strings and empty arrays
       value !== "" && 
       (Array.isArray(value) ? value.length > 0 : true)
     )
   );
-
+  
   return filteredParams;
 };
