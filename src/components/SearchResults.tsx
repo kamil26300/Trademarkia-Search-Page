@@ -22,16 +22,19 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   const totalPages = Math.ceil(totalValue / 10);
 
   useEffect(() => {
-    if (page === 1) {
-      setPrevDisabled(true);
-    } else {
-      setPrevDisabled(false);
-    }
-    if (page === totalPages) {
-      setNextDisabled(true);
-    } else {
-      setNextDisabled(false);
-    }
+    const handlePageButtonDisability = () => {
+      if (page === 1) {
+        setPrevDisabled(true);
+      } else {
+        setPrevDisabled(false);
+      }
+      if (page === totalPages) {
+        setNextDisabled(true);
+      } else {
+        setNextDisabled(false);
+      }
+    };
+    handlePageButtonDisability();
   }, []);
 
   const handleSimilarSearch = (input: string) => {
