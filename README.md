@@ -12,22 +12,20 @@ Cloned TradeMarkia's Search Page with API provided by the company for their task
 
 - **Search Progress Status**: Status messages for "Searching", "No Results Found", or "Error Occurred".
 - **API Integration**:
-  -- Fetch trademark data based on user queries and filters from provided APIs.
-  -- Display search results dynamically based on API response.
+-   Fetch trademark data based on user queries and filters from provided APIs.
+-   Display search results dynamically based on API response.
 - **Filters**:
-  -- Owner Filter: Select trademarks by the current owner.
-  -- Law Firm Filter: Filter results based on law firms associated with the trademark.
-  -- Attorney Filter: Narrow results based on attorney representation.
-  -- Status Filter: Filter trademarks based on their status (registered, pending, abandoned, etc.).
-- **Search Bar**:
-  -- Input field for user queries (e.g., search by trademark name).
-  -- Debounced search to avoid excessive API calls.
+-   Owner Filter: Select trademarks by the current owner.
+-   Law Firm Filter: Filter results based on law firms associated with the trademark.
+-   Attorney Filter: Narrow results based on attorney representation.
+-   Status Filter: Filter trademarks based on their status (registered, pending, abandoned, etc.).
+- **Search Bar**: Input field for user queries (e.g., search by trademark name). Debounced search to avoid excessive API calls.
 
 ## API Calls
 
-| Endpoint     | Method | Description                 |
-| ------------ | ------ | --------------------------- |
-| `/api/v3/us` | POST   | Fetches trademarks details. |
+| Endpoint     | Method | Description                 | Required Parameters                                                   |
+| ------------ | ------ | --------------------------- | --------------------------------------------------------------------- |
+| `/api/v3/us` | POST   | Fetches trademarks details. | input_query, sort_by, exact_match, date_query, page, rows, sort_order |
 
 Parameters
 
