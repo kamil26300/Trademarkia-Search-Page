@@ -11,14 +11,12 @@ Cloned TradeMarkia's Search Page with API provided by the company for their task
 ## Features
 
 - **Search Progress Status**: Status messages for "Searching", "No Results Found", or "Error Occurred".
-- **API Integration**:
--   Fetch trademark data based on user queries and filters from provided APIs.
--   Display search results dynamically based on API response.
+- **API Integration**: Fetch trademark data based on user queries and filters from provided APIs. Display search results dynamically based on API response.
 - **Filters**:
--   Owner Filter: Select trademarks by the current owner.
--   Law Firm Filter: Filter results based on law firms associated with the trademark.
--   Attorney Filter: Narrow results based on attorney representation.
--   Status Filter: Filter trademarks based on their status (registered, pending, abandoned, etc.).
+   Owner Filter: Select trademarks by the current owner.
+   Law Firm Filter: Filter results based on law firms associated with the trademark.
+   Attorney Filter: Narrow results based on attorney representation.
+   Status Filter: Filter trademarks based on their status (registered, pending, abandoned, etc.).
 - **Search Bar**: Input field for user queries (e.g., search by trademark name). Debounced search to avoid excessive API calls.
 
 ## API Calls
@@ -55,6 +53,7 @@ Parameters
 ### Frontend
 
 ```json
+[
     @emotion/react,
     @emotion/styled,
     @mui/material,
@@ -71,6 +70,7 @@ Parameters
     react-table-ui,
     typescript,
     web-vitals
+]
 ```
 
 ## Author
